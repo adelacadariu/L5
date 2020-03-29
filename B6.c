@@ -1,46 +1,45 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_SIZE 8
-int stack[MAX_SIZE], b[MAX_SIZE], top = -1;
+int s[8], b[8], max=8,t= -1;
 
 void push(int nr)
 {
-	if (top == MAX_SIZE - 1)
+	if (t == max - 1)
 	{
 		printf("\nEroare : Stiva este plina\n ");
 		return;
 	}
-	stack[++top] = nr;
+	s[++] = nr;
 }
 
 void pop()
 {
-	if (top == -1)
+	if (t== -1)
 	{
 		printf("\nEroare : stiva este goala\n");
 		return;
 	}
-	top--;
+	t--;
 }
 int peek()
 {
-	return stack[top];
+	return s[t];
 }
 int IsEmpty()
 {
-	if (top == -1)
+	if (t == -1)
 		return 1;
 	return 0;
 }
 void transfdec_bin(int nr)
 {
-	int i, k = 0;
-	for (i = 0; i < MAX_SIZE; i++)
+	int i,c = 0;
+	for (i = 0; i < maxim; i++)
 		b[i] = 0;
 	while (nr > 0)
 	{
-		b[k++] = nr % 2;
+		b[c++] = nr % 2;
 		nr = nr / 2;
 	}
 
@@ -48,12 +47,11 @@ void transfdec_bin(int nr)
 
 int main()
 {
-	int nr, count = 0, i;
+	int nr, cnt = 0, i;
 	scanf("%d", &nr);
 	transfdec_bin(nr);
-	for (i = 0; i < MAX_SIZE; i++)
+	for (i = 0; i < maxim; i++)
 		push(b[i]);
-	printf("Forma binara : \n\t");
 	while (IsEmpty() == 0)
 	{
 		printf("%d", peek());
@@ -61,11 +59,10 @@ int main()
 			count++;
 		pop();
 	}
-	for (i = 0; i <= 7 - count; i++)
+	for (i = 0; i <= 7 - cnt; i++)
 		push(0);
-	for (i = 7 - count; i < 7; i++)
-		push(1);
-	printf("\nForma binara maxima :\n\t ");
+	for (i = 7 - cnt; i < 7; i++)
+	     push(1);
 	while (IsEmpty() == 0)
 	{
 		printf("%d", peek());
