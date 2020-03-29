@@ -1,21 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_SIZE 8
 
-int stack[MAX_SIZE], top = -1, b[MAX_SIZE], k;
+
+int s[8], t = -1, b[8], maxim=8,cnt;
 
 void transfdec_bin(int nr)
 {
 	int i;
-	k = 0;
-	for (i = 0; i < MAX_SIZE; i++)
+	cnt= 0;
+	for (i = 0; i < 8; i++)
 		b[i] = 0;
 	while (nr > 0)
 	{
 		b[k] = nr % 2;
 		nr = nr / 2;
-		k++;
+		cnt++;
 	}
 
 }
@@ -27,40 +27,40 @@ void invers(int nr)
 
 void push(int nr)
 {
-	if (top == MAX_SIZE - 1)
+	if (t == maxim - 1)
 	{
 		printf("\nEroare : Stiva este plina\n ");
 		return;
 	}
-	stack[++top] = nr;
+	s[++t] = nr;
 }
 
 void pop()
 {
-	if (top == -1)
+	if (t == -1)
 	{
 		printf("\nEroare : stiva este goala\n");
 		return;
 	}
-	top--;
+	t--;
 }
 int main()
 {
-	int N, i, j, x;
-	scanf("%d", &N);
-	for (i = 0; i < N; i++)
+	int n,i, j, a;
+	scanf("%d", &n);
+	for (i = 0; i < n; i++)
 	{
-		scanf("%d", &x);
-		transfdec_bin(x);
+		scanf("%d", &a);
+		transfdec_bin(a);
 		for (j = 7; j >= 0; j--)
 			printf("%d", b[j]);
 		printf("\n");
-		invers(x);
+		invers(a);
 		for (j = 0; j <= 7; j++)
 			push(b[j]);
-		while (top != -1)
+		while (t != -1)
 		{
-			printf("%d", stack[top]);
+			printf("%d", s[t]);
 			pop();
 		}
 		printf("\n");
